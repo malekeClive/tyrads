@@ -1,0 +1,924 @@
+@use "./scss/mixins" as mix;
+@use "sass:map";
+@use "./scss/breakpoints" as break;
+
+.layout {
+    @include mix.grid(repeat(1, minmax(0, 1fr)), 0.75rem);
+
+    & .left {
+        padding: 1.5rem;
+
+        &>div:first-child {
+            grid-column: span 2 / span 2;
+            margin-bottom: 2.5rem;
+
+            &>h3 {
+                font-weight: 700;
+                font-size: 1.5rem;
+                line-height: 2rem;
+            }
+        }
+
+        &>div:last-child {
+            @include mix.grid(repeat(1, minmax(0, 1fr)), 0.75rem);
+
+            & .activities {
+                @include mix.grid(repeat(1, minmax(0, 1fr)), 0.75rem);
+
+                @media (min-width: map.get(break.$breakpoints, "xl")) {
+                    grid-column: span 8 / span 8;
+                    gap: 0px;
+                    grid-template-columns: repeat(8, minmax(0, 1fr));
+                }
+            }
+
+            @media (min-width: map.get(break.$breakpoints, "xl")) {
+                grid-template-columns: repeat(8, minmax(0, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (min-width: map.get(break.$breakpoints, "xl")) {
+            grid-column: span 9 / span 9;
+        }
+    }
+
+    & .right {
+        @include mix.flex(column);
+        gap: 1.5rem;
+        background-color: rgb(255 255 255 / var(--bg-opacity));
+        grid-row: span 1 / span 1;
+        padding: 1.5rem;
+
+        @media (min-width: map.get(break.$breakpoints, "xl")) {
+            grid-column: span 3 / span 3;
+            padding: 1.5rem;
+        }
+    }
+
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+// Sidebar
+.sidebar-mobile {
+    @include mix.flex(row, space-between, center);
+    padding: 1.5rem 1rem;
+    background-color: hsl(var(--primary));
+
+    // button menu burger
+    button {
+        @include mix.button();
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+
+        &:hover {
+            svg {
+                stroke: hsl(var(--primary));
+            }
+        }
+
+        svg {
+            stroke: #fff;
+        }
+    }
+
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        display: none;
+    }
+}
+
+.sidebar-mobile-list {
+    @include mix.flex(column);
+    gap: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 0;
+
+    &>a {
+
+        // button list
+        button {
+            @include mix.button();
+            gap: 0.5rem;
+            padding: 0px;
+
+            &>div {
+                @include mix.flex(row, $alignItems: center);
+                color: hsl(var(--primary));
+            }
+
+            &>p {
+                text-transform: capitalize;
+                font-size: 1rem;
+                line-height: 1.5rem;
+                font-weight: 400;
+            }
+        }
+    }
+
+}
+
+.sidebar-web {
+    display: none;
+    background-color: rgb(255 255 255 / var(--bg-opacity));
+    gap: 2.5rem;
+    height: 100%;
+    padding: 1rem;
+
+    &>li:first-child {
+        @include mix.flex(column, $alignItems: center);
+        flex: 1 1 0%;
+        gap: 2.5rem;
+
+        &>div {
+            display: inherit;
+            background-color: hsl(var(--secondary-foreground));
+            cursor: pointer;
+            border-radius: 9999px;
+            padding: 0.5rem;
+        }
+    }
+
+    &>li:nth-child(2) {
+        @include mix.flex(column, space-between, center);
+        flex: 2;
+        background-color: hsl(var(--primary-foreground));
+        border-radius: 9999px;
+        padding: 0.5rem;
+    }
+
+    &>li:nth-child(3) {
+        @include mix.flex(column, $alignItems: center);
+        gap: 1rem;
+        flex: 1;
+        justify-self: end;
+
+        &>div {
+            font-size: 0.75rem;
+            line-height: 1rem;
+        }
+    }
+
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        @include mix.flex(column, space-between);
+    }
+}
+
+.nav-item {
+    display: inherit;
+    cursor: pointer;
+    border-radius: 9999px;
+    padding: 0.5rem;
+
+    &.active {
+        background-color: hsl(var(--primary));
+        color: rgb(255 255 255 / var(--text-opacity));
+    }
+
+    &.not-active {
+        background-color: hsl(var(--primary-foreground));
+        color: hsl(var(--foreground));
+    }
+}
+
+// Analytics Card
+.card-analytic {
+    @include mix.flex(column);
+    gap: 0.75rem;
+
+    & .card-header-analytic {
+        @include mix.flex(row, space-between, center);
+
+        &>h3 {
+            font-weight: 600;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        &>button {
+            @include mix.button();
+        }
+    }
+
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        grid-column: span 3 / span 3;
+        gap: 0.75rem;
+    }
+}
+
+// Chat Card
+.card-chat {
+    position: relative;
+
+    & .card-header-chat {
+        &>h3 {
+            font-weight: 600;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+    }
+
+    & .card-body-chat {
+        @include mix.flex(column);
+
+        & .card-body-chat-content-chats {
+            @include mix.flex(column);
+            gap: 1rem;
+            overflow: scroll;
+            height: 186px;
+            padding-bottom: 0.5rem;
+
+            & .card-body-chat-content-chats-me {
+                @include mix.flex(row, $alignItems: center);
+                align-self: flex-end;
+                gap: 0.5rem;
+
+                &>div:first-child {
+                    background-color: hsl(var(--primary));
+                    border-radius: calc(var(--radius) - 2px);
+                    padding: 0.5rem;
+                    font-size: 0.75rem;
+                    line-height: 1rem;
+                    color: rgb(255 255 255 / var(--text-opacity));
+                    border-bottom-right-radius: 0px;
+                }
+            }
+
+            & .card-body-chat-content-chats-other {
+                @include mix.flex(row, $alignItems: center);
+                gap: 0.5rem;
+
+                &>div:last-child {
+                    background-color: hsl(var(--background));
+                    border-radius: calc(var(--radius) - 2px);
+                    padding: 0.5rem;
+                    font-size: 0.75rem;
+                    line-height: 1rem;
+                    border-bottom-left-radius: 0px;
+                }
+
+            }
+
+            @media (min-width: map.get(break.$breakpoints, "xl")) {
+                height: 86px;
+            }
+        }
+
+        & .card-body-chat-content-chatbox {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            right: 0.75rem;
+            background-color: hsl(var(--background));
+            border-radius: calc(var(--radius) - 2px);
+            padding: 0.5rem 0.75rem;
+
+            &>textarea {
+                background-color: hsl(var(--background));
+                font-size: 0.75rem;
+                line-height: 1rem;
+                width: 100%;
+                resize: none;
+
+                &:focus {
+                    outline: 2px solid transparent;
+                    outline-offset: 2px;
+                }
+            }
+        }
+
+        & .card-body-chat-content-chatbox-actions {
+            @include mix.flex(row, space-between, center);
+
+            &>div:first-child {
+                @include mix.flex(row);
+                gap: 0.5rem;
+            }
+
+            &>button {
+                cursor: pointer;
+                height: 1.5rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                font-size: 0.75rem;
+                line-height: 1rem;
+            }
+        }
+    }
+
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        grid-column: span 4 / span 4;
+        border-right-color: hsl(var(--primary-foreground));
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+        border-left-width: 1px;
+    }
+}
+
+// Expenses and Income Card
+.card-expenses {
+    @include mix.flex(column);
+    padding: 1rem;
+    gap: 0.5rem;
+
+    & .card-expenses-header {
+        margin-bottom: 0.75rem;
+
+        &>h3 {
+            font-size: 1rem;
+            line-height: 1.5rem;
+            font-weight: 500;
+        }
+    }
+
+    & .card-expenses-body {
+        @include mix.flex(row, space-between);
+
+        &>div:nth-child(2) {
+            @include mix.flex(row, $alignItems: center);
+            position: relative;
+
+            &>div {
+                position: absolute;
+                width: 2px;
+                border-radius: 0.25rem
+                    /* 4px */
+                ;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0px;
+                right: 0px;
+                height: 100%;
+                background-color: rgb(0 0 0 / var(--bg-opacity));
+            }
+
+            &>p {
+                background-color: rgb(255 255 255 / var(--bg-opacity));
+                z-index: 10;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+            }
+
+        }
+
+        // first-child ~> Expenses | last-child ~> Income
+        &>div:first-child,
+        div:last-child {
+            @include mix.flex(column);
+
+            // label
+            &>p:first-child {
+                font-size: 10px;
+                font-weight: 500;
+            }
+
+            // expenses or income percentages
+            &>p:nth-child(2) {
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+                font-weight: 600;
+            }
+
+            // expenses or income values
+            &>p:last-child {
+                font-size: 10px;
+                color: rgb(156 163 175 / var(--text-opacity));
+            }
+        }
+
+        &>div:last-child {
+            align-items: flex-end;
+        }
+    }
+
+    & .card-expenses-footer {
+        @include mix.flex(row);
+
+        &>div {
+            width: 100%;
+            height: 1.5rem;
+            border-radius: calc(var(--radius) - 2px);
+            border-color: rgb(255 255 255 / var(--border-opacity));
+            border-width: 2px;
+        }
+
+        // expenses
+        &>div:first-child {
+            background-color: hsl(var(--secondary));
+        }
+
+        // income
+        &>div:last-child {
+            background-color: hsl(var(--primary));
+        }
+    }
+
+}
+
+// Statistic Card
+.card-statistic {
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        grid-column: span 5 / span 5;
+    }
+
+    & .card-statistic-header {
+        &>div {
+            @include mix.flex(row, space-between, center);
+
+            &>p {
+                font-size: 0.75rem;
+                line-height: 1rem;
+                font-weight: 500;
+            }
+        }
+    }
+
+    & .card-statistic-body {
+        @include mix.flex(row, space-between, center);
+        gap: 1rem;
+
+        &>div:first-child {
+            @include mix.flex(column);
+            flex: 1 1 0%;
+            gap: 0.75rem;
+
+            // total balance wrapper
+            & .card-statistic-body-total-balance {
+                @include mix.flex(column);
+                border-bottom-width: 1px;
+                padding-bottom: 0.5rem;
+                gap: 0.25rem;
+
+                // total balance value
+                &>p {
+                    font-weight: 600;
+                    font-size: 1.5rem;
+                    line-height: 2rem;
+                }
+
+                &>div {
+                    @include mix.flex(row, $alignItems: center);
+                    gap: 0.5rem;
+
+                    // total balance asset
+                    &>div {
+                        width: 1rem;
+                        height: 1rem;
+                        background-color: hsl(var(--primary));
+                    }
+
+                    // total balance label
+                    &>p {
+                        font-size: 0.75rem;
+                        line-height: 1rem;
+                        max-width: 80px;
+                    }
+                }
+            }
+
+            // line chart wrapper
+            & .card-statistic-body-charts {
+                @include mix.flex(column);
+                gap: 0.5rem;
+
+                // line chart
+                &>div {
+                    @include mix.flex(row, $alignItems: center);
+                    gap: 1.5rem;
+
+                    & .card-statistic-body-charts-line-chart {
+                        flex: 3;
+                        width: 2.5rem;
+                        height: 2.5rem;
+                    }
+
+                    & .card-statistic-body-charts-trending {
+                        @include mix.flex(row, $alignItems: center);
+                        flex: 1;
+                        gap: 0.25rem;
+
+                        &>div {
+                            display: inherit;
+                            border-width: 1px;
+                            border-color: rgb(0 0 0 / var(--border-opacity));
+                            border-radius: 9999px;
+                            padding: 2px;
+                        }
+
+                        &>p {
+                            font-size: 0.75rem;
+                            line-height: 1rem;
+                            font-weight: 500;
+                        }
+                    }
+                }
+
+                // label
+                &>p {
+                    font-size: 10px;
+                    line-height: 1.25;
+                    color: rgb(156 163 175 / var(--text-opacity));
+                    max-width: 100px;
+                }
+            }
+        }
+
+        &>div:last-child {
+            flex: 2;
+            width: 2.5rem;
+        }
+
+    }
+}
+
+.custom-select-trigger {
+    width: 74px;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+}
+
+// Latest Transaction Card
+.card-last-transaction {
+
+    & .card-last-transaction-header {
+        @include mix.flex(row, space-between, center);
+        border-bottom-color: hsl(var(--background));
+        border-bottom-width: 1px;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+
+        &>h3 {
+            font-weight: 600;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        &>div {
+            @include mix.flex(row, $alignItems: center);
+            gap: 1rem;
+            font-size: 0.75rem;
+            line-height: 1rem;
+
+            &>button {
+                @include mix.button();
+            }
+        }
+    }
+
+    & .card-last-transaction-body {
+        height: 9rem;
+        overflow: scroll;
+
+        & .card-last-transaction-body-last-transaction-items {
+            @include mix.flex(column);
+            gap: 1rem;
+
+            & .card-last-transaction-body-last-transaction-item {
+                @include mix.flex(row, space-between, center);
+
+                &.last {
+                    border-bottom-width: 1px;
+                    border-bottom-color: hsl(var(--background));
+                    padding-bottom: 1rem;
+                }
+
+                &>div {
+                    @include mix.flex(row, $alignItems: center);
+                }
+
+                &>div:first-child {
+                    gap: 0.5rem;
+
+                    // avatar
+                    &>div:first-child {
+                        font-size: 0.75rem;
+                        line-height: 1rem;
+                    }
+
+                    // info
+                    &>div:last-child {
+                        @include mix.flex(column);
+
+                        // name
+                        &>p:first-child {
+                            font-size: 0.75rem;
+                            line-height: 1rem;
+                            font-weight: 500;
+                        }
+
+                        // date
+                        &>p:last-child {
+                            font-size: 10px;
+                            color: rgb(156 163 175 / var(--text-opacity));
+                        }
+                    }
+                }
+
+                &>div:last-child {
+                    gap: 1rem;
+
+                    &>p {
+                        font-size: 0.75rem;
+                        line-height: 1rem;
+                    }
+
+                    &>button {
+                        @include mix.button();
+                    }
+                }
+            }
+        }
+    }
+
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        grid-column: span 5 / span 5;
+    }
+}
+
+// Premium Card
+.card-premium {
+    @include mix.flex(column);
+    padding: 1rem;
+    gap: 0.5rem;
+
+    & .card-premium-header {
+        &>h3 {
+            text-align: center;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+        }
+    }
+
+    & .card-premium-body {
+        @include mix.flex(column);
+        gap: 0.75rem;
+
+        &>div:first-child {
+            height: 2.5rem;
+            width: 2.5rem;
+            background-color: hsl(var(--primary));
+        }
+
+        &>div:nth-child(2) {
+
+            &>h3 {
+                font-size: 1rem;
+                line-height: 1.5rem;
+                font-weight: 600;
+            }
+
+            &>p {
+                font-size: 0.75rem;
+                line-height: 1rem;
+                color: rgb(156 163 175 / var(--text-opacity));
+            }
+        }
+
+        &>button {
+            border-radius: 0.75rem;
+        }
+    }
+}
+
+// Todo Card
+.card-todo {
+    & .card-todo-header {
+        &>h3 {
+            font-weight: 600;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+    }
+
+    & .card-todo-body {
+        @include mix.flex(column);
+        gap: 1rem;
+        margin-top: 0.5rem;
+
+        // time
+        &>div:first-child {
+            @include mix.flex(row, $alignItems: center);
+
+            // from & to
+            &>div:first-child,
+            &>div:last-child {
+
+                // time
+                &>p:first-child {
+                    font-weight: 600;
+                }
+
+                // date
+                &>p:last-child {
+                    font-size: 10px;
+                    color: rgb(156 163 175 / var(--text-opacity));
+                }
+            }
+
+            // chevron
+            &>div:nth-child(2) {
+                @include mix.flex(row, center);
+                color: rgb(156 163 175 / var(--text-opacity));
+                width: 4rem;
+            }
+        }
+
+        // item list
+        &>div:last-child {
+            @include mix.flex(column);
+            gap: 1rem;
+
+            // total and action
+            &>div:first-child {
+                @include mix.flex(row, space-between, center);
+
+                // total
+                &>div:first-child {
+                    @include mix.flex(row);
+                    gap: 0.25rem;
+
+                    &>span {
+                        font-size: 0.75rem;
+                        line-height: 1rem;
+                    }
+
+                    // counter
+                    &>span:first-child {
+                        color: rgb(156 163 175 / var(--text-opacity));
+                    }
+
+                    // label
+                    &>span:last-child {
+                        font-weight: 500;
+                    }
+                }
+
+                // action
+                &>div:last-child {
+                    &>button {
+                        @include mix.flex(row, $alignItems: center);
+                        gap: 0.25rem;
+                        background-color: transparent;
+                        cursor: pointer;
+
+                        &>p {
+                            font-size: 0.75rem;
+                            line-height: 1rem;
+                            font-weight: 500;
+                        }
+
+                    }
+                }
+            }
+
+            // items
+            &>div:last-child {
+                @include mix.grid(repeat(2, minmax(0, 1fr)), 0.75rem);
+                height: 6rem;
+                overflow-y: scroll;
+
+                &>div {
+                    @include mix.flex(row, space-between);
+                    background-color: hsl(var(--background));
+                    padding: 0.75rem;
+                    border-radius: calc(var(--radius) - 2px);
+
+                    // checkbox
+                    &>div:first-child {
+                        @include mix.flex(row, $alignItems: center);
+                        gap: 0.25rem;
+
+                        &>p {
+                            font-size: 0.75rem;
+                            line-height: 1rem;
+                            font-weight: 500;
+                        }
+                    }
+
+                    // option
+                    &>div:last-child {
+                        &>button {
+                            @include mix.button();
+                            padding: 0px;
+                            height: 1.25rem;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        grid-column: span 4 / span 4;
+        border-right-color: hsl(var(--primary-foreground));
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+        border-right-width: 1px;
+    }
+}
+
+// Visa Card
+.card-visa {
+    position: relative;
+    background-color: hsl(var(--primary)) !important;
+    height: 200px;
+    color: rgb(255 255 255 / var(--text-opacity));
+
+    &>div {
+        @include mix.flex(row, space-between, flex-end);
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+
+    @media (min-width: map.get(break.$breakpoints, "xl")) {
+        grid-column: span 3 / span 3;
+        height: 100%;
+    }
+}
+
+// Latst Spending Card
+.card-latest-spending {
+    @include mix.flex(column);
+    padding: 1rem;
+    gap: 0.5rem;
+
+    & .card-latest-spending-header {
+        @include mix.flex(row, space-between, center);
+        margin-bottom: 0.75rem;
+
+        &>h3 {
+            font-size: 1rem;
+            line-height: 1.5rem;
+            font-weight: 500;
+        }
+
+        &>button {
+            @include mix.button();
+        }
+    }
+
+    & .card-latest-spending-body {
+        @include mix.flex(column);
+        gap: 1rem;
+
+        &>button {
+            @include mix.flex(row, center, center);
+            @include mix.button();
+            gap: 0.5rem;
+            color: hsl(var(--primary));
+
+            &>p {
+                font-size: 0.75rem;
+                line-height: 1rem;
+            }
+
+            &:hover {
+                color: hsl(var(--primary));
+            }
+        }
+    }
+}
+
+.spend-item {
+    @include mix.flex(row, $alignItems: center);
+    border-bottom-width: 1px;
+    border-bottom-color: hsl(var(--border));
+    padding-bottom: 1rem;
+    gap: 1rem;
+
+    &.last {
+        border-style: none;
+    }
+
+    &>div:first-child {
+        font-size: 0.75rem;
+        line-height: 1rem;
+    }
+
+    &>div:last-child {
+        flex: 1 1 0%;
+
+        &>h5 {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+        }
+
+        &>p {
+            font-size: 10px;
+            line-height: 1rem;
+            color: rgb(156 163 175 / var(--text-opacity));
+        }
+    }
+}

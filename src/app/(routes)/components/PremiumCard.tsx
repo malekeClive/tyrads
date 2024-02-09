@@ -4,21 +4,17 @@ import React from "react";
 
 function PremiumCard() {
   return (
-    <CardContainer variant="outline" className="flex flex-col p-4 gap-2">
-      <CardHeader>
-        <h3 className="text-center text-sm font-medium">Go to Premium</h3>
+    <CardContainer className="variant-outline card-premium">
+      <CardHeader className="card-premium-header">
+        <h3>Go to Premium</h3>
       </CardHeader>
-      <CardBody className="flex flex-col gap-3">
-        <div className="h-10 w-10 bg-primary"></div>
+      <CardBody className="card-premium-body">
+        <div></div>
         <div>
-          <h3 className="font-semibold">Need more features?</h3>
-          <p className="text-xs text-gray-400">
-            Update your account to premium to get more features.
-          </p>
+          <h3>Need more features?</h3>
+          <p>Update your account to premium to get more features.</p>
         </div>
-        <Button size="lg" className="rounded-xl">
-          Get now
-        </Button>
+        <Button className="variant-default size-lg">Get now</Button>
       </CardBody>
     </CardContainer>
   );

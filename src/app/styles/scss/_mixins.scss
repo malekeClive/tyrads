@@ -1,0 +1,41 @@
+@mixin flex($direction, $justifyContent: flex-start, $alignItems: stretch) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+}
+
+@mixin grid($template-column, $gap) {
+    display: grid;
+    grid-template-columns: $template-column;
+    gap: $gap;
+}
+
+@mixin button() {
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+@mixin animate-in() {
+    animation-name: enter;
+    animation-duration: 150ms;
+    --enter-opacity: initial;
+    --enter-scale: initial;
+    --enter-rotate: initial;
+    --enter-translate-x: initial;
+    --enter-translate-y: initial;
+}
+
+@mixin animate-out() {
+    animation-name: exit;
+    animation-duration: 150ms;
+    --exit-opacity: initial;
+    --exit-scale: initial;
+    --exit-rotate: initial;
+    --exit-translate-x: initial;
+    --exit-translate-y: initial;
+}

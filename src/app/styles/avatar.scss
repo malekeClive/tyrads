@@ -1,0 +1,26 @@
+@use "./scss/mixins.scss" as mix;
+
+.avatar-base {
+    @include mix.flex(row, center, center);
+    border-radius: 9999px;
+    color: #fff;
+
+    &.variant-default {
+        background-color: hsl(var(--primary));
+    }
+
+    &.variant-outline {
+        border-width: 1px;
+        border-color: hsl(var(--primary));
+    }
+
+    &.size-default {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    &.size-xs {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}

@@ -1,32 +1,13 @@
 import { ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { cva, type VariantProps } from "class-variance-authority";
-
-const cardContainerVariants = cva("rounded-xl py-2 px-4", {
-  variants: {
-    variant: {
-      default: "bg-white",
-      outline: "border border-background-foreground",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
 
 const CardContainer = ({
   className,
   children,
-  variant,
 }: {
   className?: string;
   children: ReactNode;
-} & VariantProps<typeof cardContainerVariants>) => {
-  return (
-    <div className={cn(cardContainerVariants({ variant, className }))}>
-      {children}
-    </div>
-  );
+}) => {
+  return <div className={`card-base ${className}`}>{children}</div>;
 };
 
 const CardHeader = ({

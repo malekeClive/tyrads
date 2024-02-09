@@ -60,61 +60,52 @@ function TodoCard() {
   };
 
   return (
-    <CardContainer className="xl:col-span-4 xl:rounded-tr-none xl:rounded-br-none xl:border-r-primary-foreground xl:border-r-[1px]">
-      <CardHeader>
-        <h3 className="font-semibold text-sm">List of items to buy</h3>
+    <CardContainer className="variant-default card-todo">
+      <CardHeader className="card-todo-header">
+        <h3>List of items to buy</h3>
       </CardHeader>
-      <CardBody className="flex flex-col gap-4 mt-2">
-        <div className="flex flex-row items-center">
+      <CardBody className="card-todo-body">
+        <div>
           <div>
-            <p className="font-semibold">02:00</p>
-            <p className="text-[10px] text-gray-400">Sat, August 12</p>
+            <p>02:00</p>
+            <p>Sat, August 12</p>
           </div>
-          <div className="text-gray-400 w-16 flex justify-center">
+          <div>
             <ChevronRight size={18} />
           </div>
           <div>
-            <p className="font-semibold">05:00</p>
-            <p className="text-[10px] text-gray-400">Sat, September 12</p>
+            <p>05:00</p>
+            <p>Sat, September 12</p>
           </div>
         </div>
-        <div className="flex flex-col itemc gap-4">
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-row gap-1">
-              <span className="text-xs text-gray-400">
+        <div>
+          <div>
+            <div>
+              <span>
                 {checkedItems}/{todoItems.length}
               </span>
-              <span className="text-xs font-medium">Shopping list</span>
+              <span>Shopping list</span>
             </div>
             <div>
-              <Button
-                variant="ghost"
-                className="flex flex-row items-center gap-1"
-              >
+              <Button className="variant-ghost size-default">
                 <Plus size={14} />
-                <p className="text-xs font-medium">Add an item</p>
+                <p>Add an item</p>
               </Button>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3 h-24 overflow-y-scroll">
+          <div>
             {todoItems.map((item, idx) => (
-              <div
-                key={idx}
-                className="flex flex-row justify-between bg-background px-3 py-3 rounded-md"
-              >
-                <div className="flex flex-row gap-1 items-center">
+              <div key={idx}>
+                <div>
                   <Checkbox
                     id={item.name}
                     checked={item.selected}
                     onCheckedChange={() => onCheckClicked(item.id)}
                   />
-                  <p className="text-xs font-medium">{item.name}</p>
+                  <p>{item.name}</p>
                 </div>
                 <div>
-                  <Button
-                    variant="ghost"
-                    className="p-0 h-5 hover:bg-transparent"
-                  >
+                  <Button className="variant-ghost size-default">
                     <MoreVertical size={16} />
                   </Button>
                 </div>

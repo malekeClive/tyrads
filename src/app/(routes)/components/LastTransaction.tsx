@@ -16,19 +16,19 @@ const LastTransactionItem = ({
   className?: string;
 }) => {
   return (
-    <div className={`flex flex-row justify-between items-center ${className}`}>
-      <div className="flex flex-row items-center gap-2">
-        <Avatar size="xs" className="text-xs">
-          B
-        </Avatar>
-        <div className="flex flex-col">
-          <p className="text-xs font-medium">{name}</p>
-          <p className="text-[10px] text-gray-400">{date}</p>
+    <div
+      className={`card-last-transaction-body-last-transaction-item ${className}`}
+    >
+      <div>
+        <Avatar className="variant-default size-xs">B</Avatar>
+        <div>
+          <p>{name}</p>
+          <p>{date}</p>
         </div>
       </div>
-      <div className="flex flex-row items-center gap-4">
-        <p className="text-xs font-medium">{transaction}</p>
-        <Button variant="ghost" size="xs" className="hover:bg-transparent">
+      <div>
+        <p>{transaction}</p>
+        <Button className="variant-ghost size-xs">
           <MoreVertical size={16} />
         </Button>
       </div>
@@ -51,24 +51,16 @@ const dummyLastTransation = [
 
 function LastTransaction() {
   return (
-    <CardContainer className="xl:col-span-5">
-      <CardHeader className="flex flex-row justify-between items-center border-b-background-foreground border-b-[1px] pb-2 mb-2">
-        <h3 className="font-semibold text-sm">Last transactions</h3>
-        <div className="flex flex-row text-xs items-center gap-4">
-          <Button variant="underline" size="xs">
-            Newest
-          </Button>
-          <Button
-            variant="ghost"
-            className="text-xs p-0 hover:bg-transparent"
-            size="xs"
-          >
-            Oldest
-          </Button>
+    <CardContainer className="variant-default card-last-transaction">
+      <CardHeader className="card-last-transaction-header">
+        <h3>Last transactions</h3>
+        <div>
+          <Button className="variant-underline size-xs">Newest</Button>
+          <Button className="variant-ghost size-xs">Oldest</Button>
         </div>
       </CardHeader>
-      <CardBody className="h-36 overflow-scroll">
-        <div className="flex flex-col gap-4">
+      <CardBody className="card-last-transaction-body">
+        <div className="card-last-transaction-body-last-transaction-items">
           {dummyLastTransation.map(({ name, date, transaction }, idx) => {
             if (idx === dummyLastTransation.length - 1) {
               return (
@@ -87,7 +79,7 @@ function LastTransaction() {
                 name={name}
                 date={date}
                 transaction={transaction}
-                className="border-b-[1px] border-b-background-foreground pb-4"
+                className="last"
               />
             );
           })}

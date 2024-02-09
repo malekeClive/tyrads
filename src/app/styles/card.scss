@@ -1,0 +1,13 @@
+.card-base {
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+
+    &.variant-default {
+        background-color: rgb(255 255 255 / var(--bg-opacity));
+    }
+
+    &.variant-outline {
+        border-width: 1px;
+        border-color: hsl(var(--border));
+    }
+}

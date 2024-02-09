@@ -20,10 +20,10 @@ function AnalyticsCard() {
   };
 
   return (
-    <CardContainer className="xl:col-span-3 flex flex-col gap-3 xl:gap-3">
-      <CardHeader className="flex flex-row justify-between items-center">
+    <CardContainer className="variant-default card-analytic">
+      <CardHeader className="card-header-analytic">
         <h3 className="font-semibold text-sm">Analytics</h3>
-        <Button variant="ghost" size="xs" className="hover:bg-transparent">
+        <Button className="variant-ghost size-xs">
           <MoreVertical size={18} />
         </Button>
       </CardHeader>

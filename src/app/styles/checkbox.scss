@@ -1,0 +1,44 @@
+@use "./scss/mixins.scss" as mix;
+
+.checkbox-base {
+    @include mix.flex(row, center, center);
+
+    height: 1rem;
+    width: 1rem;
+    flex-shrink: 0;
+    border-radius: calc(var(--radius) - 4px);
+    border-width: 1.5px;
+    border-color: rgb(0 0 0 / var(--border-opacity));
+    --ring-offset-color: hsl(var(--background));
+    box-shadow: var(--ring-inset) 0 0 0 calc(0.5px + var(--ring-offset-width)) var(--ring-color);
+
+    &[data-state="checked"] {
+        background-color: hsl(var(--primary));
+        border-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+    }
+
+    &:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+    }
+
+    &:focus-visible {
+        --ring-color: hsl(var(--ring));
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    & .indicator {
+        @include mix.flex(row, center, center);
+        color: currentColor;
+
+        & .check {
+            height: 0.75rem;
+            width: 0.75rem;
+        }
+    }
+}

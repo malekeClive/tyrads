@@ -47,12 +47,12 @@ function StatisticCard() {
   };
 
   return (
-    <CardContainer className="xl:col-span-5">
-      <CardHeader>
-        <div className="flex flex-row justify-between items-center">
-          <p className="text-xs font-medium">Balance statistics</p>
+    <CardContainer className="variant-default card-statistic">
+      <CardHeader className="card-statistic-header">
+        <div>
+          <p>Balance statistics</p>
           <Select>
-            <SelectTrigger className="w-[74px] text-xs font-medium">
+            <SelectTrigger className="custom-select-trigger">
               <SelectValue placeholder="Filter" />
             </SelectTrigger>
             <SelectContent>
@@ -63,42 +63,38 @@ function StatisticCard() {
           </Select>
         </div>
       </CardHeader>
-      <CardBody>
-        <div className="flex flex-row gap-4 items-center justify-between">
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="border-b-[1px] pb-2 flex flex-col gap-1">
-              <p className="font-semibold text-2xl">$564</p>
-              <div className="flex flex-row items-center gap-2">
-                <div className="w-4 h-4 bg-primary"></div>
-                <p className="text-xs max-w-[80px]">Your total balance</p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-row items-center gap-6">
-                <div className="flex-[3] w-10 h-10">
-                  <LineChart
-                    labels={linechartDummy.labels}
-                    datasets={linechartDummy.datasets}
-                  />
-                </div>
-                <div className="flex-1 flex flex-row items-center gap-1">
-                  <div className="border-[1px] border-black rounded-full p-[2px]">
-                    <TrendingUp size={12} />
-                  </div>
-                  <p className="text-xs font-medium">6%</p>
-                </div>
-              </div>
-              <p className="text-[10px] leading-tight text-gray-400 max-w-[100px]">
-                Always see your earnings updates
-              </p>
+      <CardBody className="card-statistic-body">
+        <div>
+          <div className="card-statistic-body-total-balance">
+            <p>$564</p>
+            <div>
+              <div></div>
+              <p>Your total balance</p>
             </div>
           </div>
-          <div className="flex-[2] w-10">
-            <BarChart
-              labels={barchartDummy.labels}
-              datasets={barchartDummy.datasets}
-            />
+          <div className="card-statistic-body-charts">
+            <div>
+              <div className="card-statistic-body-charts-line-chart">
+                <LineChart
+                  labels={linechartDummy.labels}
+                  datasets={linechartDummy.datasets}
+                />
+              </div>
+              <div className="card-statistic-body-charts-trending">
+                <div>
+                  <TrendingUp size={12} />
+                </div>
+                <p>6%</p>
+              </div>
+            </div>
+            <p>Always see your earnings updates</p>
           </div>
+        </div>
+        <div>
+          <BarChart
+            labels={barchartDummy.labels}
+            datasets={barchartDummy.datasets}
+          />
         </div>
       </CardBody>
     </CardContainer>

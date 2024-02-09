@@ -27,13 +27,11 @@ const SpendItem = (props: {
 }) => {
   const { title, date, className } = props;
   return (
-    <div className={`flex flex-row items-center gap-4 ${className}`}>
-      <Avatar size="xs" className="text-xs">
-        Z
-      </Avatar>
-      <div className="flex-1">
-        <h5 className="text-sm font-medium">{title}</h5>
-        <p className="text-xs text-gray-400">{date}</p>
+    <div className={`spend-item ${className}`}>
+      <Avatar className="variant-default size-xs">Z</Avatar>
+      <div>
+        <h5>{title}</h5>
+        <p>{date}</p>
       </div>
     </div>
   );
@@ -41,37 +39,26 @@ const SpendItem = (props: {
 
 function LatestSpendingCard() {
   return (
-    <CardContainer variant="outline" className="flex flex-col p-4 gap-2">
-      <CardHeader className="mb-3 flex flex-row justify-between items-center">
-        <h3 className="font-medium">Latest Spending</h3>
-        <Button variant="ghost" size="xs" className="hover:bg-transparent">
+    <CardContainer className="variant-outline card-latest-spending">
+      <CardHeader className="card-latest-spending-header">
+        <h3>Latest Spending</h3>
+        <Button className="variant-ghost size-xs">
           <MoreVertical size={18} />
         </Button>
       </CardHeader>
-      <CardBody className="flex flex-col gap-4">
+      <CardBody className="card-latest-spending-body">
         {dummySpendItems.map(({ title, date }, idx) => {
           if (idx === dummySpendItems.length - 1) {
-            return <SpendItem key={idx} title={title} date={date} />;
+            return (
+              <SpendItem className="last" key={idx} title={title} date={date} />
+            );
           }
-          return (
-            <SpendItem
-              key={idx}
-              title={title}
-              date={date}
-              className="border-b-[1px] border-b-background-foreground pb-4"
-            />
-          );
+          return <SpendItem key={idx} title={title} date={date} />;
         })}
-        <Link href="/" passHref className="flex justify-center">
-          <Button
-            variant="ghost"
-            size="xs"
-            className="flex flex-row justify-center gap-2 items-center text-primary hover:text-primary hover:bg-transparent"
-          >
-            <p className="text-xs">View all</p>
-            <MoveRight size={14} />
-          </Button>
-        </Link>
+        <Button className="variant-ghost size-xs">
+          <p>View all</p>
+          <MoveRight size={14} />
+        </Button>
       </CardBody>
     </CardContainer>
   );

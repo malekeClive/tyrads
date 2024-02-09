@@ -18,7 +18,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetFooter,
   SheetHeader,
   SheetTrigger,
 } from "../ui/sheet";
@@ -50,11 +49,7 @@ const NavItem = ({
   return (
     <div
       onClick={onClick}
-      className={`cursor-pointer rounded-full p-2 ${
-        isActive
-          ? "bg-primary text-white"
-          : "bg-primary-foreground text-foreground"
-      }`}
+      className={`nav-item ${isActive ? "active" : "not-active"}`}
     >
       {children}
     </div>
@@ -93,31 +88,26 @@ function Sidebar() {
 
   return (
     <nav>
-      <div className="xl:hidden flex flex-row px-6 py-4 items-center justify-between bg-primary">
+      <div className="sidebar-mobile">
         <Target size={30} color="#fff" />
         <div>
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" className="px-2">
-                <Menu size={30} color="#fff" />
+              <Button className="variant-ghost size-default">
+                <Menu size={30} />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left">
+            <SheetContent className="variant-side-left">
               <SheetHeader>
                 <Target size={30} />
               </SheetHeader>
-              <ul className="py-8 flex flex-col gap-4">
+              <ul className="sidebar-mobile-list">
                 {NavItems.map((item) => (
                   <SheetClose asChild key={item.name}>
                     <Link href="#" passHref>
-                      <Button
-                        variant="ghost"
-                        className="flex flex-row gap-2 p-0"
-                      >
-                        <div className="text-primary">{item.component}</div>
-                        <p className="capitalize text-base font-normal">
-                          {item.name}
-                        </p>
+                      <Button className="variant-ghost size-default">
+                        <div>{item.component}</div>
+                        <p>{item.name}</p>
                       </Button>
                     </Link>
                   </SheetClose>
@@ -128,14 +118,14 @@ function Sidebar() {
         </div>
       </div>
 
-      <ul className="hidden bg-white xl:flex flex-col gap-10 h-full justify-between p-4">
-        <li className="flex-1 flex flex-col gap-10 items-center">
+      <ul className="sidebar-web ">
+        <li>
           <Target />
-          <div className="bg-secondary-foreground cursor-pointer rounded-full p-2">
+          <div>
             <MessagesSquare size={18} />
           </div>
         </li>
-        <li className="flex-[2] flex flex-col bg-primary-foreground justify-between items-center rounded-full p-2">
+        <li>
           {NavItems.map((item: SidebarMenu) => (
             <NavItem
               key={item.name}
@@ -146,10 +136,8 @@ function Sidebar() {
             </NavItem>
           ))}
         </li>
-        <li className="flex-[1] justify-self-end flex flex-col gap-4 items-center">
-          <Avatar size="xs" className="text-xs">
-            A
-          </Avatar>
+        <li>
+          <Avatar className="variant-default size-xs">A</Avatar>
           <LogOut size={18} />
         </li>
       </ul>

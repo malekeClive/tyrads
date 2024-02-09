@@ -1,0 +1,187 @@
+@use "./scss/mixins.scss" as mix;
+
+.select-trigger {
+    @include mix.flex(row, space-between, center);
+    height: 2.5rem;
+    border-style: none;
+    width: 100%;
+    border-width: 1px;
+    border-radius: calc(var(--radius) - 2px);
+    border-color: hsl(var(--input));
+    background-color: hsl(var(--background));
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    --ring-offset-color: hsl(var(--background));
+    --ring-color: hsl(var(--ring));
+
+    &::placeholder {
+        color: hsl(var(--muted-foreground));
+    }
+
+    &:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        box-shadow: var(--ring-inset) 0 0 0 calc(0.5px + var(--ring-offset-width)) var(--ring-color);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &>span {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
+}
+
+.select-label {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 2rem;
+    padding-right: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+}
+
+.select-content {
+    position: relative;
+    z-index: 50;
+    max-height: 24rem;
+    min-width: 8rem;
+    overflow: hidden;
+    border-radius: calc(var(--radius) - 2px);
+    border-width: 1px;
+    background-color: hsl(var(--popover));
+    color: hsl(var(--popover-foreground));
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    &.popper {
+        &[data-side="bottom"] {
+            transform: translateY(0.25rem);
+        }
+
+        &[data-side="left"] {
+            transform: translateX(-0.25rem);
+        }
+
+        &[data-side="right"] {
+            transform: translateX(0.25rem);
+        }
+
+        &[data-side="top"] {
+            transform: translateY(-0.25rem);
+        }
+    }
+
+    &.viewport {
+        padding: 0.25rem;
+
+        &.popper {
+            height: var(--radix-select-trigger-height);
+            width: 100%;
+            min-width: var(--radix-select-trigger-width);
+        }
+    }
+
+    &[data-state="open"] {
+        @include mix.animate-in();
+        --enter-opacity: 0;
+        --enter-scale: .95;
+    }
+
+    &[data-state="closed"] {
+        @include mix.animate-out();
+        --exit-opacity: 0;
+        --exit-scale: .95;
+    }
+
+    &[data-side="bottom"] {
+        --enter-translate-y: -0.5rem;
+    }
+
+    &[data-side="left"] {
+        --enter-translate-x: 0.5rem;
+    }
+
+    &[data-side="right"] {
+        --enter-translate-x: -0.5rem;
+    }
+
+    &[data-side="top"] {
+        --enter-translate-y: 0.5rem;
+    }
+}
+
+.select-item {
+    position: relative;
+    display: flex;
+    width: 100%;
+    cursor: default;
+    user-select: none;
+    align-items: center;
+    border-radius: calc(var(--radius) - 4px);
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 2rem;
+    padding-right: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+
+    &[data-disabled] {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    &:focus {
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+    }
+
+    & .indicator-container {
+        position: absolute;
+        left: 0.5rem;
+        display: flex;
+        height: 0.875rem;
+        width: 0.875rem;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.select-separator {
+    margin: 0.25rem -0.25rem;
+    height: 1px;
+    background-color: hsl(var(--muted));
+}
+
+.icon-check {
+    height: 1rem;
+    width: 1rem;
+}
+
+.icon-chevron {
+    height: 1rem;
+    width: 1rem;
+    opacity: 0.5;
+
+    &.up,
+    &.down {
+        opacity: 0.5;
+    }
+}
+
+.select-scroll-button {
+    display: flex;
+    cursor: default;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
