@@ -23,6 +23,7 @@ import {
 } from "../ui/sheet";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 type SidebarName =
   | "home"
@@ -137,7 +138,14 @@ function Sidebar() {
           ))}
         </li>
         <li>
-          <Avatar className="variant-default size-xs">A</Avatar>
+          <Avatar className="variant-default size-xs">
+            <Image
+              alt="clive"
+              src="/avatar-cute-monster.jpeg"
+              width={25}
+              height={25}
+            />
+          </Avatar>
           <LogOut size={18} />
         </li>
       </ul>

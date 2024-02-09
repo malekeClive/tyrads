@@ -2,6 +2,7 @@ import { Avatar } from "@/components/Avatar";
 import { CardBody, CardContainer, CardHeader } from "@/components/Card";
 import { Button } from "@/components/ui/button";
 import { Paperclip, Smile } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 function ChatCard() {
@@ -14,11 +15,20 @@ function ChatCard() {
         <div className="card-body-chat-content-chats">
           <div className="card-body-chat-content-chats-me">
             <div>Are you ready?</div>
-            <Avatar className="variant-default size-default">A</Avatar>
+            <Avatar className="variant-default size-default">
+              <Image
+                alt="A"
+                src="/avatar-cute-monster.jpeg"
+                width={35}
+                height={35}
+              />
+            </Avatar>
           </div>
 
           <div className="card-body-chat-content-chats-other">
-            <Avatar className="variant-default size-default">B</Avatar>
+            <Avatar className="variant-default size-default">
+              <Image alt="B" src="/avatar-dog.jpeg" width={35} height={35} />
+            </Avatar>
             <div>I have prepared everything</div>
           </div>
         </div>

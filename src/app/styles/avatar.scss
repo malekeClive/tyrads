@@ -4,6 +4,7 @@
     @include mix.flex(row, center, center);
     border-radius: 9999px;
     color: #fff;
+    overflow: hidden;
 
     &.variant-default {
         background-color: hsl(var(--primary));

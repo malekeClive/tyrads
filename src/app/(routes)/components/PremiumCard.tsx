@@ -1,5 +1,6 @@
 import { CardBody, CardContainer, CardHeader } from "@/components/Card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import React from "react";
 
 function PremiumCard() {
@@ -9,7 +10,11 @@ function PremiumCard() {
         <h3>Go to Premium</h3>
       </CardHeader>
       <CardBody className="card-premium-body">
-        <div></div>
+        <div>
+          <div>
+            <Image alt="premium" src="/crown.png" width={100} height={100} />
+          </div>
+        </div>
         <div>
           <h3>Need more features?</h3>
           <p>Update your account to premium to get more features.</p>

@@ -12,6 +12,7 @@ import "chart.js/auto";
 import { TrendingUp } from "lucide-react";
 import BarChart from "@/components/BarChart";
 import LineChart from "@/components/LineChart";
+import Image from "next/image";
 
 function StatisticCard() {
   const barchartDummy = {
@@ -68,7 +69,7 @@ function StatisticCard() {
           <div className="card-statistic-body-total-balance">
             <p>$564</p>
             <div>
-              <div></div>
+              <Image alt="asset" src="/coin.png" width={30} height={30} />
               <p>Your total balance</p>
             </div>
           </div>
